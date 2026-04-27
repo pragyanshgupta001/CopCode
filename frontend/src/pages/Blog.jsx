@@ -5,7 +5,11 @@ const posts = [
   {
     tag: "Engineering",
     tagColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/5",
+<<<<<<< HEAD
     title: "How We Built Sub-10ms Code Sync",
+=======
+    title: "How We Built Sub-10ms Cop Code",
+>>>>>>> a4a12d9 (full project implementation)
     summary: "A deep dive into CRDT-based operational transforms and how they power seamless real-time editing.",
     date: "Mar 5, 2025",
     readTime: "8 min read",

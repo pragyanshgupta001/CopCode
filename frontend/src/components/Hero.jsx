@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { Zap, Hash } from "lucide-react";
+=======
+import { Link, useNavigate } from "react-router-dom";
+import { Zap, Hash } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
+>>>>>>> a4a12d9 (full project implementation)
 
 function FloatingCard({ className, filename, lines }) {
   return (
@@ -40,7 +46,11 @@ function Terminal() {
     <div className="code-window max-w-2xl mx-auto shadow-2xl shadow-black/50 border-cyan-500/10">
       <div className="flex items-center gap-2 px-4 py-3 bg-[#0d1117]/80 border-b border-[#1e2a3a]">
         <span className="dot-red" /><span className="dot-yellow" /><span className="dot-green" />
+<<<<<<< HEAD
         <span className="ml-3 font-mono text-xs text-gray-500 tracking-wide">codesync — terminal</span>
+=======
+        <span className="ml-3 font-mono text-xs text-gray-500 tracking-wide">copcode — terminal</span>
+>>>>>>> a4a12d9 (full project implementation)
       </div>
       <div className="px-5 py-4 min-h-[148px] space-y-0.5">
         {steps.slice(0, count).map((step, i) => {
@@ -55,7 +65,13 @@ function Terminal() {
           return (
             <div key={i} className="font-mono text-sm leading-7">
               {step.type === "cmd" && <span className="text-cyan-400">$ </span>}
+<<<<<<< HEAD
               <span className={step.type === "out" ? "text-cyan-400" : "text-white"}>{step.text}</span>
+=======
+              <span className={step.type === "out" ? "text-cyan-400" : "text-white"}>
+                {step.text}
+              </span>
+>>>>>>> a4a12d9 (full project implementation)
             </div>
           );
         })}
@@ -65,6 +81,22 @@ function Terminal() {
 }
 
 export default function HeroS() {
+<<<<<<< HEAD
+=======
+  const { authUser } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleProtectedNav = (to) => {
+    if (!authUser) {
+      navigate("/login", {
+        state: { redirectTo: to },
+      });
+      return;
+    }
+    navigate(to);
+  };
+
+>>>>>>> a4a12d9 (full project implementation)
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-20 px-6 overflow-hidden bg-[#0d1117]">
       <div className="absolute inset-0 bg-grid pointer-events-none" />
@@ -83,6 +115,7 @@ export default function HeroS() {
       <div className="relative z-10 text-center max-w-4xl mx-auto w-full">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-500/5 mb-8 animate-fade-up">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+<<<<<<< HEAD
           <span className="font-mono text-xs text-cyan-400 tracking-widest">Real-time collaboration is live</span>
         </div>
 
@@ -102,6 +135,45 @@ export default function HeroS() {
           <Link to="/join-room" className="btn-secondary flex items-center gap-2 text-base px-8 py-3.5">
             <Hash size={16} /> Join a Room
           </Link>
+=======
+          <span className="font-mono text-xs text-cyan-400 tracking-widest">
+            Real-time collaboration is live
+          </span>
+        </div>
+
+        <h1 className="font-mono font-bold leading-[1.05] mb-6">
+          <span className="block text-5xl sm:text-6xl md:text-7xl text-white animate-fade-up delay-100">
+            Code Together.
+          </span>
+          <span className="block text-5xl sm:text-6xl md:text-7xl text-cyan-400 glow-cyan animate-fade-up delay-200">
+            Build Faster.
+          </span>
+        </h1>
+
+        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up delay-300">
+          A real-time collaborative coding platform with shared main editor
+          and personal workspace.
+        </p>
+
+        <div className="flex flex-wrap gap-4 justify-center mb-14 animate-fade-up delay-400">
+          {/* Create Room — protected */}
+          <button
+            onClick={() => handleProtectedNav("/create-room")}
+            className="btn-primary flex items-center gap-2 text-base px-8 py-3.5"
+          >
+            <Zap size={16} />
+            Create a Room
+          </button>
+
+          {/* Join Room — protected */}
+          <button
+            onClick={() => handleProtectedNav("/join-room")}
+            className="btn-secondary flex items-center gap-2 text-base px-8 py-3.5"
+          >
+            <Hash size={16} />
+            Join a Room
+          </button>
+>>>>>>> a4a12d9 (full project implementation)
         </div>
 
         <div className="animate-fade-up delay-500">
@@ -110,4 +182,8 @@ export default function HeroS() {
       </div>
     </section>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a12d9 (full project implementation)

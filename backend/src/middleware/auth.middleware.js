@@ -22,4 +22,29 @@ export const protectRoute = async (req,res,next) => {
         console.log("Error in protectRoute middleware: ", error.message);
         res.status(500).json({message:"Internal server error"});
     }
+<<<<<<< HEAD
 }
+=======
+}
+export const verifySocketToken = async (socket, next) => {
+  try {
+    const token =
+      socket.handshake.auth?.token ||
+      socket.handshake.headers?.cookie
+        ?.split(";")
+        .find((c) => c.trim().startsWith("token="))
+        ?.split("=")[1];
+
+    if (!token) return next(new Error("No token"));
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) return next(new Error("User not found"));
+
+    socket.user = user;
+    next();
+  } catch (err) {
+    next(new Error("Invalid token"));
+  }
+};
+>>>>>>> a4a12d9 (full project implementation)

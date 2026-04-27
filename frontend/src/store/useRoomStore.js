@@ -14,12 +14,70 @@ const generateSlug = (name = "") => {
   return slug || "room";
 };
 
+<<<<<<< HEAD
 export const useRoomStore = create((set) => ({
   currentRoom: null,
   myRooms: [],
   isCreating: false,
   isJoining: false,
   isFetchingRoom: false,
+=======
+ const useRoomStore = create((set) => ({
+  currentRoom: null,
+  myRooms: null,
+  isFetchingMyRooms: false,
+  isCreating: false,
+  isJoining: false,
+  isFetchingRoom: false,
+  room: null,
+  members: [],
+  activeFile: null,
+  openFiles: [],
+  fileTree: [],
+  messages: [],
+  isLoadingRoom: false,
+  roomError: null,
+  setRoom: (room) => set({ room }),
+  setMembers: (members) => set({ members }),
+  setFileTree: (fileTree) => set({ fileTree }),
+  setMessages: (messages) => set({ messages }),
+  addMessage: (msg) =>
+    set((state) => ({ messages: [...state.messages, msg] })),
+
+  setActiveFile: (filePath) => set({ activeFile: filePath }),
+
+  openFile: (filePath) =>
+    set((state) => ({
+      openFiles: state.openFiles.includes(filePath)
+        ? state.openFiles
+        : [...state.openFiles, filePath],
+      activeFile: filePath,
+    })),
+
+  closeFile: (filePath) =>
+    set((state) => {
+      const remaining = state.openFiles.filter((f) => f !== filePath);
+      return {
+        openFiles: remaining,
+        activeFile:
+          state.activeFile === filePath
+            ? remaining[remaining.length - 1] || null
+            : state.activeFile,
+      };
+    }),
+    setIsLoadingRoom: (v) => set({ isLoadingRoom: v }),
+  setRoomError: (e) => set({ roomError: e }),
+
+  clearRoom: () =>
+    set({
+      room: null,
+      members: [],
+      activeFile: null,
+      openFiles: [],
+      fileTree: [],
+      messages: [],
+    }),
+>>>>>>> a4a12d9 (full project implementation)
 
   createRoom: async (data) => {
     set({ isCreating: true });
@@ -87,6 +145,10 @@ export const useRoomStore = create((set) => ({
   },
 
   getMyRooms: async () => {
+<<<<<<< HEAD
+=======
+    set({ isFetchingMyRooms: true });
+>>>>>>> a4a12d9 (full project implementation)
     try {
       const res = await axiosInstance.get("/rooms/my-rooms");
       set({ myRooms: res.data.rooms });
@@ -94,8 +156,21 @@ export const useRoomStore = create((set) => ({
       toast.error(
         error?.response?.data?.message || "Failed to fetch rooms"
       );
+<<<<<<< HEAD
     }
   },
 
   clearCurrentRoom: () => set({ currentRoom: null }),
 }));
+=======
+      set({ myRooms: [] });
+    } finally {
+      set({ isFetchingMyRooms: false });
+    }
+  },
+
+  // clearCurrentRoom
+  clearCurrentRoom: () => set({ currentRoom: null }),
+}));
+export default useRoomStore;
+>>>>>>> a4a12d9 (full project implementation)

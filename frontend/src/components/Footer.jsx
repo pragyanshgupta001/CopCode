@@ -15,7 +15,11 @@ export default function Footer() {
               <Code2 size={16} className="text-cyan-400" />
             </div>
             <span className="font-mono font-bold text-white">
+<<<<<<< HEAD
               Code<span className="text-cyan-400">Sync</span>
+=======
+              Cop<span className="text-cyan-400">Code</span>
+>>>>>>> a4a12d9 (full project implementation)
             </span>
           </Link>
 
@@ -55,7 +59,11 @@ export default function Footer() {
 
         <div className="pt-6 border-t border-[#1e2a3a] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-xs text-gray-600">
+<<<<<<< HEAD
             © {new Date().getFullYear()} CodeSync. Built for developers, by developers.
+=======
+            © {new Date().getFullYear()} CopCode. Built for developers, by developers.
+>>>>>>> a4a12d9 (full project implementation)
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />

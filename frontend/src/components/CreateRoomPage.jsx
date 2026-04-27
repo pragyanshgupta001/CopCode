@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Code2, Plus, Copy, Check, ArrowRight } from "lucide-react";
 import CodeWindow from "../components/CodeWindow";
+<<<<<<< HEAD
 import { useRoomStore } from "../store/useRoomStore";
+=======
+import  useRoomStore  from "../store/useRoomStore";
+>>>>>>> a4a12d9 (full project implementation)
 
 const LANGUAGES = [
   { label: "JavaScript", value: "javascript" },
@@ -26,6 +30,12 @@ const toSlug = (name) =>
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
+<<<<<<< HEAD
+=======
+
+// shown after room is created so owner can copy roomId
+// before entering the room
+>>>>>>> a4a12d9 (full project implementation)
 function SuccessModal({ roomId, roomName, slug, onEnter }) {
   const [copied, setCopied] = useState(false);
 
@@ -129,6 +139,10 @@ function SuccessModal({ roomId, roomName, slug, onEnter }) {
   );
 }
 
+<<<<<<< HEAD
+=======
+//CreateRoomPage
+>>>>>>> a4a12d9 (full project implementation)
 export default function CreateRoomPage() {
   const [form, setForm] = useState({
     name: "",
@@ -144,6 +158,10 @@ export default function CreateRoomPage() {
   const { createRoom, isCreating } = useRoomStore();
   const navigate = useNavigate();
 
+<<<<<<< HEAD
+=======
+  //validation
+>>>>>>> a4a12d9 (full project implementation)
   const validateName = (value) => {
     if (!value.trim()) {
       setNameError("Room name is required");
@@ -161,6 +179,10 @@ export default function CreateRoomPage() {
     return true;
   };
 
+<<<<<<< HEAD
+=======
+  //submit
+>>>>>>> a4a12d9 (full project implementation)
   const handleCreate = async (e) => {
     e.preventDefault();
     if (!validateName(form.name)) return;
@@ -176,6 +198,10 @@ export default function CreateRoomPage() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  //enter room after copying ID
+>>>>>>> a4a12d9 (full project implementation)
   const handleEnterRoom = () => {
     navigate(`/room/${createdRoom.slug}`, {
       state: { roomId: createdRoom.roomId },

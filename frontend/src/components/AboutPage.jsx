@@ -21,7 +21,11 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#0e1e2e]/80 via-[#161b22] to-[#1a1230]/60 pointer-events-none" />
               <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-600/5 blur-3xl pointer-events-none" />
               <div className="relative z-10">
+<<<<<<< HEAD
                 <p className="font-mono text-xs text-cyan-400 tracking-widest mb-5">## ABOUT CODESYNC</p>
+=======
+                <p className="font-mono text-xs text-cyan-400 tracking-widest mb-5">## ABOUT COPCODE</p>
+>>>>>>> a4a12d9 (full project implementation)
                 <h1 className="font-mono font-bold text-3xl md:text-4xl mb-6 leading-tight">
                   <span className="text-white">Built for developers, </span>
                   <span className="text-cyan-400">by developers</span>
@@ -30,10 +34,17 @@ export default function AboutPage() {
                   This platform enables multiple developers to collaborate in real time using a shared main
                   editor and individual workspaces to reduce conflicts and improve productivity. Whether
                   you're pair programming, running a coding workshop, or building with a distributed team —
+<<<<<<< HEAD
                   CodeSync keeps everyone in sync.
                 </p>
                 <p className="text-gray-400 text-base leading-relaxed">
                   We built CodeSync because we were tired of screen-sharing sessions, copy-pasting code
+=======
+                  CopCode keeps everyone in sync.
+                </p>
+                <p className="text-gray-400 text-base leading-relaxed">
+                  We built CopCode because we were tired of screen-sharing sessions, copy-pasting code
+>>>>>>> a4a12d9 (full project implementation)
                   into Slack, and merge conflicts from collaborative debugging. The result is a platform that
                   feels as natural as coding alone — but with your whole team beside you.
                 </p>
