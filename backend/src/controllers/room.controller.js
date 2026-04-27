@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import Room from "../models/Room.model.js";
-import User from "../models/User.js";
-import { generateRoomId } from "../config/generateRoomId.js";
-
-
-=======
 import Room from "../models/room.model.js";
 import User from "../models/User.js";
 import { generateRoomId } from "../config/generateRoomId.js";
 
->>>>>>> a4a12d9 (full project implementation)
 export const createRoom = async (req, res) => {
   try {
     const { name, language, maxMembers, description } = req.body;
@@ -38,13 +30,8 @@ export const createRoom = async (req, res) => {
 
     const normalizedLanguage = (language || "javascript")
       .toLowerCase()
-<<<<<<< HEAD
-      .replace(/\+\+/, "pp")  // C++ → cpp
-      .replace(/\s+/g, "");   // remove spaces
-=======
       .replace(/\+\+/, "pp")
       .replace(/\s+/g, ""); 
->>>>>>> a4a12d9 (full project implementation)
 
     const allowedLanguages = [
       "javascript", "typescript", "python", "rust",
@@ -63,10 +50,6 @@ export const createRoom = async (req, res) => {
       maxMembers: maxMembers || 8,
       owner: userId,
 
-<<<<<<< HEAD
-      // creator added as first member with role "owner"
-=======
->>>>>>> a4a12d9 (full project implementation)
       members: [
         {
           user: userId,
@@ -136,10 +119,6 @@ export const joinRoom = async (req, res) => {
         });
       }
 
-<<<<<<< HEAD
-      //add user as editor
-=======
->>>>>>> a4a12d9 (full project implementation)
       room.members.push({
         user: userId,
         role: "editor",
@@ -147,17 +126,9 @@ export const joinRoom = async (req, res) => {
       });
     }
 
-<<<<<<< HEAD
-    //reset 7-day countdown on every join
     room.lastActivityAt = new Date();
     await room.save();
 
-    //add to user recentRooms
-=======
-    room.lastActivityAt = new Date();
-    await room.save();
-
->>>>>>> a4a12d9 (full project implementation)
     await User.findByIdAndUpdate(userId, {
       $push: {
         recentRooms: {
@@ -167,10 +138,6 @@ export const joinRoom = async (req, res) => {
       },
     });
 
-<<<<<<< HEAD
-    // return populated room
-=======
->>>>>>> a4a12d9 (full project implementation)
     const populatedRoom = await Room.findById(room._id)
       .populate("owner", "fullName email profilePic")
       .populate("members.user", "fullName email profilePic")

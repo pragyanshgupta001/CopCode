@@ -22,9 +22,6 @@ export const protectRoute = async (req,res,next) => {
         console.log("Error in protectRoute middleware: ", error.message);
         res.status(500).json({message:"Internal server error"});
     }
-<<<<<<< HEAD
-}
-=======
 }
 export const verifySocketToken = async (socket, next) => {
   try {
@@ -47,4 +44,3 @@ export const verifySocketToken = async (socket, next) => {
     next(new Error("Invalid token"));
   }
 };
->>>>>>> a4a12d9 (full project implementation)

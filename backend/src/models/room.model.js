@@ -72,10 +72,6 @@ const memberSchema = new mongoose.Schema({
   },
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a4a12d9 (full project implementation)
 const roomSchema = new mongoose.Schema(
   {
     name: {
@@ -132,13 +128,7 @@ const roomSchema = new mongoose.Schema(
     },
 
     members: [memberSchema],
-<<<<<<< HEAD
-
     fileTree: [fileNodeSchema],
-
-=======
-    fileTree: [fileNodeSchema],
->>>>>>> a4a12d9 (full project implementation)
     activeFile: {
       type: String,
       default: null,
@@ -175,13 +165,7 @@ const roomSchema = new mongoose.Schema(
 );
 
 roomSchema.index({ "members.user": 1 });
-<<<<<<< HEAD
-
 roomSchema.index({ isActive: 1, lastActivityAt: 1 });
-
-=======
-roomSchema.index({ isActive: 1, lastActivityAt: 1 });
->>>>>>> a4a12d9 (full project implementation)
 const Room = mongoose.model("Room", roomSchema);
 
 export default Room;

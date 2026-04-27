@@ -6,19 +6,11 @@ import CodeWindow from "../components/CodeWindow";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
-<<<<<<< HEAD
-  const [tab, setTab]         = useState("login");
-  const [showPass, setShowPass] = useState(false);
-  const [formData, setFormData]       = useState({ fullName: "", email: "", password: "" });
-  const [errors, setErrors]   = useState({});
-  const navigate              = useNavigate();
-=======
   const [tab, setTab] = useState("login");
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", dob: "" });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
->>>>>>> a4a12d9 (full project implementation)
 
   const {signup,login,isSigningUp,isLoggingIn} = useAuthStore();
 
@@ -26,12 +18,9 @@ export default function LoginPage() {
   if (tab === "signup" && !formData.fullName.trim()) {
     return toast.error("Full name is required");
   }
-<<<<<<< HEAD
-=======
   if (tab === "signup" && !formData.dob) {
     return toast.error("Date of birth is required");
   }
->>>>>>> a4a12d9 (full project implementation)
 
   if (!formData.email.trim()) return toast.error("Email is required");
   if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
@@ -114,8 +103,6 @@ else {
               </div>
             )}
 
-<<<<<<< HEAD
-=======
             {tab === "signup" && (
               <div>
                 <label className="font-mono text-xs text-gray-500 tracking-widest block mb-2">DATE OF BIRTH</label>
@@ -128,7 +115,6 @@ else {
               </div>
             )}
 
->>>>>>> a4a12d9 (full project implementation)
             {/* Email */}
             <div>
               <label className="font-mono text-xs text-gray-500 tracking-widest block mb-2">EMAIL</label>
@@ -176,15 +162,6 @@ else {
     : (isSigningUp ? "Creating Account..." : "Create Account →")
 }
             </button>
-<<<<<<< HEAD
-
-            {/* Divider */}
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-[#1e2a3a]" />
-              <span className="font-mono text-xs text-gray-600">or</span>
-              <div className="flex-1 h-px bg-[#1e2a3a]" />
-            </div>
-=======
             {tab === "login" && (
               <div className="text-right -mt-2">
                 <Link
@@ -197,7 +174,6 @@ else {
             )}
 
             
->>>>>>> a4a12d9 (full project implementation)
             
           </form>
         </CodeWindow>

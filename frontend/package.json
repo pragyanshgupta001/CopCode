@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@codemirror/autocomplete": "^6.20.1",
     "@codemirror/commands": "^6.10.3",
     "@codemirror/lang-cpp": "^6.0.3",
@@ -32,7 +30,6 @@
     "@codemirror/view": "^6.40.0",
     "@monaco-editor/react": "^4.7.0",
     "@uiw/react-codemirror": "^4.25.9",
->>>>>>> a4a12d9 (full project implementation)
     "axios": "^1.13.6",
     "daisyui": "^5.5.19",
     "lucide-react": "^0.577.0",
@@ -40,15 +37,12 @@
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^6.30.3",
-<<<<<<< HEAD
-=======
     "socket.io-client": "^4.8.3",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0",
     "y-monaco": "^0.1.6",
     "y-protocols": "^1.0.7",
     "yjs": "^13.6.30",
->>>>>>> a4a12d9 (full project implementation)
     "zustand": "^5.0.11"
   },
   "devDependencies": {

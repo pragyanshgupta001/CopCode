@@ -14,14 +14,6 @@ const generateSlug = (name = "") => {
   return slug || "room";
 };
 
-<<<<<<< HEAD
-export const useRoomStore = create((set) => ({
-  currentRoom: null,
-  myRooms: [],
-  isCreating: false,
-  isJoining: false,
-  isFetchingRoom: false,
-=======
  const useRoomStore = create((set) => ({
   currentRoom: null,
   myRooms: null,
@@ -77,7 +69,6 @@ export const useRoomStore = create((set) => ({
       fileTree: [],
       messages: [],
     }),
->>>>>>> a4a12d9 (full project implementation)
 
   createRoom: async (data) => {
     set({ isCreating: true });
@@ -145,10 +136,7 @@ export const useRoomStore = create((set) => ({
   },
 
   getMyRooms: async () => {
-<<<<<<< HEAD
-=======
     set({ isFetchingMyRooms: true });
->>>>>>> a4a12d9 (full project implementation)
     try {
       const res = await axiosInstance.get("/rooms/my-rooms");
       set({ myRooms: res.data.rooms });
@@ -156,13 +144,6 @@ export const useRoomStore = create((set) => ({
       toast.error(
         error?.response?.data?.message || "Failed to fetch rooms"
       );
-<<<<<<< HEAD
-    }
-  },
-
-  clearCurrentRoom: () => set({ currentRoom: null }),
-}));
-=======
       set({ myRooms: [] });
     } finally {
       set({ isFetchingMyRooms: false });
@@ -173,4 +154,3 @@ export const useRoomStore = create((set) => ({
   clearCurrentRoom: () => set({ currentRoom: null }),
 }));
 export default useRoomStore;
->>>>>>> a4a12d9 (full project implementation)

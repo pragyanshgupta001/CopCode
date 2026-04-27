@@ -2,11 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Code2, Hash, ArrowRight, Users } from "lucide-react";
 import CodeWindow from "../components/CodeWindow";
-<<<<<<< HEAD
-import { useRoomStore } from "../store/useRoomStore";
-=======
 import  useRoomStore  from "../store/useRoomStore";
->>>>>>> a4a12d9 (full project implementation)
 import { useAuthStore } from "../store/useAuthStore";
 
 export default function JoinRoomPage() {
@@ -17,11 +13,8 @@ export default function JoinRoomPage() {
   const { authUser } = useAuthStore();
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
   const recentRooms = myRooms ?? [];
 
->>>>>>> a4a12d9 (full project implementation)
   const loadRooms = useCallback(() => {
     getMyRooms();
   }, []);
@@ -96,11 +89,7 @@ export default function JoinRoomPage() {
           </span>
         </Link>
 
-<<<<<<< HEAD
-        {/* Join by ID form */}
-=======
         {/* ── Join by ID form ──────────────────────────── */}
->>>>>>> a4a12d9 (full project implementation)
         <CodeWindow filename="join-room.jsx" className="shadow-2xl mb-5">
           <form onSubmit={handleJoin} className="px-7 py-8 space-y-6">
             <div>
@@ -126,17 +115,9 @@ export default function JoinRoomPage() {
                   value={roomId}
                   onChange={(e) => {
                     setRoomId(e.target.value);
-<<<<<<< HEAD
-                    // clear error as user types after first error
                     if (roomIdError) validateRoomId(e.target.value);
                   }}
                   onBlur={(e) => {
-                    // only validate on blur if something is typed
-=======
-                    if (roomIdError) validateRoomId(e.target.value);
-                  }}
-                  onBlur={(e) => {
->>>>>>> a4a12d9 (full project implementation)
                     if (e.target.value.trim()) validateRoomId(e.target.value);
                   }}
                   placeholder="e.g. abc1-de2f-gh3i"
@@ -170,11 +151,7 @@ export default function JoinRoomPage() {
           </form>
         </CodeWindow>
 
-<<<<<<< HEAD
-        {/* Recent rooms */}
-=======
         {/* ── Recent rooms ─────────────────────────────── */}
->>>>>>> a4a12d9 (full project implementation)
         <CodeWindow filename="recent.json" className="shadow-xl">
           <div className="px-5 py-3.5 border-b border-[#1e2a3a]">
             <p className="font-mono text-xs text-gray-500 tracking-widest">
@@ -183,11 +160,7 @@ export default function JoinRoomPage() {
           </div>
 
           <div className="divide-y divide-[#1e2a3a]">
-<<<<<<< HEAD
-            {myRooms.length === 0 ? (
-=======
             {recentRooms.length === 0 ? (
->>>>>>> a4a12d9 (full project implementation)
               <div className="px-5 py-8 text-center">
                 <p className="font-mono text-xs text-gray-600">
                   No recent rooms yet.
@@ -197,11 +170,7 @@ export default function JoinRoomPage() {
                 </p>
               </div>
             ) : (
-<<<<<<< HEAD
-              myRooms.slice(0, 5).map((room) => {
-=======
               recentRooms.slice(0, 5).map((room) => {
->>>>>>> a4a12d9 (full project implementation)
                 const role = getUserRole(room);
                 const isOnline = room.onlineMembers?.length > 0;
 
