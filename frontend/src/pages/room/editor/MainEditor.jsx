@@ -4,66 +4,7 @@ import * as Y from "yjs";
 import { MonacoBinding } from "y-monaco";
 import { X, Save } from "lucide-react";
 import { getFileIcon, getFileIconColor } from "../utils/fileIcons";
-
-const MONACO_THEME = {
-  base: "vs-dark", inherit: true,
-  rules: [
-    { token: "comment", foreground: "6e7681", fontStyle: "italic" },
-    { token: "keyword", foreground: "ff7b72" },
-    { token: "string", foreground: "a5d6ff" },
-    { token: "number", foreground: "79c0ff" },
-    { token: "function", foreground: "d2a8ff" },
-    { token: "type", foreground: "ffa657" },
-  ],
-  colors: {
-    "editor.background": "#0d1117",
-    "editor.foreground": "#e6edf3",
-    "editor.lineHighlightBackground": "#161b22",
-    "editor.selectionBackground": "#1f3a5f",
-    "editorLineNumber.foreground": "#3d4450",
-    "editorLineNumber.activeForeground": "#6e7681",
-    "editorCursor.foreground": "#22d3ee",
-    "editorIndentGuide.background": "#21262d",
-    "editorBracketMatch.border": "#22d3ee",
-    "scrollbarSlider.background": "#30363d88",
-    "minimap.background": "#0d1117",
-  },
-};
-
-const EDITOR_OPTIONS = {
-  fontSize: 13,
-  fontFamily: "'JetBrains Mono', 'Fira Code', Consolas, monospace",
-  fontLigatures: true,
-  lineHeight: 22,
-  wordWrap: "on",
-  minimap: { enabled: true, scale: 1 },
-  scrollBeyondLastLine: false,
-  smoothScrolling: true,
-  cursorBlinking: "smooth",
-  cursorSmoothCaretAnimation: "on",
-  bracketPairColorization: { enabled: true },
-  guides: { bracketPairs: true, indentation: true },
-  formatOnPaste: true,
-  tabSize: 2,
-  insertSpaces: true,
-  folding: true,
-  renderLineHighlight: "gutter",
-  scrollbar: { vertical: "auto", horizontal: "auto", verticalScrollbarSize: 8 },
-  padding: { top: 12, bottom: 12 },
-  mouseWheelZoom: true,
-};
-
-const LANG_MAP = {
-  js:"javascript", jsx:"javascript", ts:"typescript", tsx:"typescript",
-  py:"python", rs:"rust", go:"go", java:"java", cpp:"cpp", c:"c",
-  rb:"ruby", kt:"kotlin", swift:"swift", css:"css", scss:"scss",
-  html:"html", json:"json", md:"markdown", yaml:"yaml", yml:"yaml",
-  sh:"shell", sql:"sql", xml:"xml", txt:"plaintext",
-};
-
-function getMonacoLanguage(filename) {
-  return LANG_MAP[filename?.split(".").pop()?.toLowerCase()] || "plaintext";
-}
+import { MONACO_THEME, EDITOR_OPTIONS, getMonacoLanguage } from "./editorShared.js";
 
 //Tab Bar
 function TabBar({ tabs, activeFile, onSwitchTab, onCloseTab }) {
@@ -245,11 +186,31 @@ export default function MainEditor({
       Y.applyUpdate(ydoc, new Uint8Array(upd), "remote");
     };
 
-    const overwrite = ({ filePath: fp, update: upd }) => {
+    /**
+     * Full sync from server (push / overwrite). Never merge a snapshot update into
+     * this client's Y.Doc — Y.merge would interleave CRDT ops and duplicate text.
+     * Prefer authoritative `content`; else decode snapshot on a throwaway Doc.
+     */
+    const overwrite = ({ filePath: fp, update: upd, content: snapshot }) => {
       if (fp !== activePathRef.current) return;
-      if (!upd?.length) return;
-      // Apply with "overwrite" origin — prevents re-emit echo
-      Y.applyUpdate(ydoc, new Uint8Array(upd), "overwrite");
+      const ytext = ydoc.getText("content");
+
+      let text = typeof snapshot === "string" ? snapshot : null;
+      if (text === null && upd?.length) {
+        const probe = new Y.Doc();
+        try {
+          Y.applyUpdate(probe, new Uint8Array(upd));
+          text = probe.getText("content").toString();
+        } finally {
+          probe.destroy();
+        }
+      }
+      if (text === null) return;
+
+      Y.transact(ydoc, () => {
+        if (ytext.length > 0) ytext.delete(0, ytext.length);
+        if (text.length > 0) ytext.insert(0, text);
+      }, "overwrite");
     };
 
     const yjsUpdate = (upd, origin) => {
@@ -321,10 +282,12 @@ export default function MainEditor({
 
   useEffect(() => {
     if (activeFile) return;
-    // When editor is not rendered, guard against stale/disposed instance use.
-    setEditorReady(false);
-    editorRef.current = null;
-    monacoRef.current = null;
+    // Defer reset so we do not synchronously setState inside the effect body (React Compiler).
+    queueMicrotask(() => {
+      setEditorReady(false);
+      editorRef.current = null;
+      monacoRef.current = null;
+    });
   }, [activeFile]);
 
   // React calls the returned cleanup on:

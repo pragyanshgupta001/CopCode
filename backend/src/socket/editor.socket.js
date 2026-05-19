@@ -186,9 +186,11 @@ export const registerEditorSocket = (io, socket) => {
       await persistYDoc(roomId, filePath, ydoc, socket.user._id, true);
 
       const fullUpdate = Y.encodeStateAsUpdate(ydoc);
+      const snapshotText = ytext.toString();
       io.to(roomId).emit("editor:overwrite", {
         filePath,
         update: Array.from(fullUpdate),
+        content: snapshotText,
       });
 
       const fileName = filePath.split("/").pop();

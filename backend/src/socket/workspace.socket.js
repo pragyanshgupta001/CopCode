@@ -201,6 +201,7 @@ export const registerWorkspaceSocket = (io, socket) => {
       io.to(roomId).emit("editor:overwrite", {
         filePath: resolvedPath,
         update: Array.from(fullUpdate),
+        content,
       });
       io.to(roomId).emit("editor:file-pushed", {
         filePath: resolvedPath,
